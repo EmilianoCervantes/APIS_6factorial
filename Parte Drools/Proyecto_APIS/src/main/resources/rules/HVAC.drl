@@ -119,7 +119,7 @@ rule "No hay luz de día"
 		$fuenteIlum.getEncendidoTotal==true;
 end
 
-rule "Luz natural y artificial superan el umbarl"
+rule "Luz natural y artificial superan el umbral"
 	when
 		$ilum: FuenteNatural(hvac=="Iluminación" && (presenciaTotal==true || presenciaParcial==true))
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
@@ -130,9 +130,9 @@ rule "Luz natural y artificial superan el umbarl"
 		$fuenteIlum.getEncendidoParcial()=true;
 end
 
-rule "Luz natural y artificial no superan el umbarl"
+rule "Luz natural y artificial no superan el umbral"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==true)
+		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==false)
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
 		$juntos: NaturalArtificial(hvac=="Iluminación")
 	then
