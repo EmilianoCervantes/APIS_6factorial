@@ -1,0 +1,125 @@
+package com.sample
+ 
+import com.sample.DroolsTest.Message;
+//Creen al menos 10 reglas en Drools...
+//de las cuales se implementen las dos de la figura 9 del artículo.
+
+
+//Una sola declaración
+//En vez de tener que declarar por cada tipo de sensor
+//declare Sensor
+	//nombre: String @key
+	//Que HVAC/Climatiazacion analiza
+	//tipoClimatizacion: TipoHVAC @key
+	//Teoricamente sensores siempre encendidos...
+	//Pero puede haber algún caso inesperado
+	//encendido: boolean @key
+	//presenciaDetectada: boolean @key
+//end
+
+//Cambio sensor por persona
+//horas\precencia de 0 a 24
+declare Persona
+	nombre: String @key
+	presenciaInicio: int @key
+	presenciaFin: int @key 
+end
+
+declare FuenteGastoEnergetico
+	nombre: String @key
+	encendido: boolean @key
+	tipoClimatizacion: TipoHVAC @key
+end
+
+declare TipoHVAC
+	HVAC: String @key
+end
+
+declare RecursosNaturales
+	//Aportacion puede ser luz, calefaccion, otro
+	aportacion: TipoHVAC @key
+	nombre: String @key
+	horaInicio: int @key
+	horaFin: int @key
+end
+//Tsp=set point temperature, trec=recovery time
+//Iluminación como electricidad
+rule "Carga hechos"
+	then
+		TipoHVAC ac = new TipoHVAC("AC");
+		insert(ac);
+		TipoHVAC vent = new TipoHVAC("Ventilación");
+		insert(vent);
+		TipoHVAC calef = new TipoHVAC("Calefacción");
+		insert(calef);
+		TipoHVAC ilum = new TipoHVAC("Iluminación");
+		insert(ilum);
+		
+		//Por el momento dejaré uno de cada clase
+		insert(new FuenteGastoEnergetico("ACuno",true,ac));
+		insert(new FuenteGastoEnergetico("Rooftop",true,vent));
+		insert(new FuenteGastoEnergetico("Calentador",true,calef));
+		insert(new FuenteGastoEnergetico("Focos",true,ilum));
+		
+		insert(new Persona("Emilino",,));
+		
+		insert(new RecursosNaturales(calef,"LuzNatural",6,18));
+end
+
+rule "Revisar iluminación Día"
+	when
+		
+	then
+		//$ilum.getEncendido() = true;
+end
+rule "Apagar Luz Dia"
+	when
+		
+	then
+end
+
+rule "Revisar iluminación Noche"
+	when
+	then
+end
+rule "Apagar Luz Noche"
+	when
+	then
+end
+//AC es aire acondicionado
+rule "Gasto AC"
+	when
+	then
+end
+
+rule "Ahorro AC"
+	when
+	then
+end
+
+rule "Gasto Calefaccion"
+	when
+	then
+end
+
+rule "Ahorro Calefaccion"
+	when
+	then
+end
+
+rule "Hello World"
+    when
+        m : Message( status == Message.HELLO, myMessage : message )
+    then
+        System.out.println( myMessage );
+        m.setMessage( "Goodbye cruel world" );
+        m.setStatus( Message.GOODBYE );
+        update( m );
+end
+
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
