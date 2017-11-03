@@ -31,7 +31,7 @@ declare FuenteGasto
 	//nombre: String @key
 	encendidoTotal: boolean @key
 	encendidoParcial: boolean @key
-	tipoClimatizacion: TipoHVAC @key
+	tipoHvac: TipoHVAC @key
 end
 
 declare TipoHVAC
@@ -40,12 +40,18 @@ end
 
 declare FuenteNatural
 	//Aportacion puede ser luz, calefaccion, otro
-	aporta: TipoHVAC @key
+	hvac: TipoHVAC @key
 	//nombre: String @key
 	presenciaTotal: boolean @key
 	presenciaParcial: boolean @key
 	//horaInicio: int @key
 	//horaFin: int @key
+end
+
+//Momentos en que las dos aportaciones existen
+declare NaturalArtificial
+	hvac: TipoHVAC @key
+	mayorUmbral: boolean @key
 end
 
 //Tsp=set point temperature, trec=recovery time
@@ -75,27 +81,30 @@ rule "Carga hechos"
 		insert(new FuenteNatural(ilum,true,false));
 		insert(new FuenteNatural(calef,true,false));
 		insert(new FuenteNatural(ac,true,false));
+		
+		insert(new NaturalArtificial(ilum,false));
 end
 
 rule "Encender luces"
 	when
 		$persona: Persona(quiereEncender == true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoClimatizacion=="Iluminación")
+		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoHvac=="Iluminación")
 	then
 		$fuenteIlum.getEncendido()=true;
 end
 
 rule "Hay luz de día suficiente"
 	when
-		$ilum: FuenteNatural(aporta=="Iluminación" && presenciaTotal==true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoClimatizacion=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==true)
+		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminación")
 	then
 		$fuenteIlum.getEncendidoTotal==false;
+		$fuenteIlum.getEncendidoParcial==false;
 end
-rule "Np hay luz de día suficiente"
+rule "No hay luz de día suficiente"
 	when
-		$ilum: FuenteNatural(aporta=="Iluminación" && presenciaTotal==false && presenciaParcial==true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoClimatizacion=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==true)
+		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminación")
 	then
 		$fuenteIlum.getEncendidoTotal==false;
 		$fuenteIlum.getEncendidoParcial==true;
@@ -103,11 +112,33 @@ end
 
 rule "No hay luz de día"
 	when
-		$ilum: FuenteNatural(aporta=="Iluminación" &&presenciaTotal==false &&presenciaParcial==false)
-		$fuenteIlum: FuenteGasto(tipoClimatizacion=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminación" &&presenciaTotal==false &&presenciaParcial==false)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación")
 	then
 		$fuenteIlum.getEncendidoParcial==false;
 		$fuenteIlum.getEncendidoTotal==true;
+end
+
+rule "Luz natural y artificial superan el umbarl"
+	when
+		$ilum: FuenteNatural(hvac=="Iluminación" && (presenciaTotal==true || presenciaParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+		$juntos: NaturalArtificial(hvac=="Iluminación")
+	then
+		$juntos.getMayorUmbral()=true;
+		$fuenteIlum.getEncendidoTotal()=false;
+		$fuenteIlum.getEncendidoParcial()=true;
+end
+
+rule "Luz natural y artificial no superan el umbarl"
+	when
+		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==true)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+		$juntos: NaturalArtificial(hvac=="Iluminación")
+	then
+		$juntos.getMayorUmbral()=false;
+		$fuenteIlum.getEncendidoTotal()=true;
+		$fuenteIlum.getEncendidoParcial()=false;
 end
 //AC es aire acondicionado
 rule "Gasto AC"
