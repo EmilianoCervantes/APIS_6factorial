@@ -90,7 +90,7 @@ rule "Encender luces"
 		$persona: Persona(quiereEncender == true)
 		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoHvac=="Iluminación")
 	then
-		$fuenteIlum.getEncendido()=true;
+		$fuenteIlum.setEncendido(true);
 end
 
 rule "Hay luz de día suficiente"
@@ -98,16 +98,16 @@ rule "Hay luz de día suficiente"
 		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==true)
 		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminación")
 	then
-		$fuenteIlum.getEncendidoTotal==false;
-		$fuenteIlum.getEncendidoParcial==false;
+		$fuenteIlum.setEncendidoTotal(false);
+		$fuenteIlum.setEncendidoParcial(false);
 end
 rule "No hay luz de día suficiente"
 	when
 		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==true)
 		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminación")
 	then
-		$fuenteIlum.getEncendidoTotal==false;
-		$fuenteIlum.getEncendidoParcial==true;
+		$fuenteIlum.setEncendidoTotal(false);
+		$fuenteIlum.setEncendidoParcial(true);
 end
 
 rule "No hay luz de día"
@@ -115,8 +115,8 @@ rule "No hay luz de día"
 		$ilum: FuenteNatural(hvac=="Iluminación" &&presenciaTotal==false &&presenciaParcial==false)
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación")
 	then
-		$fuenteIlum.getEncendidoParcial==false;
-		$fuenteIlum.getEncendidoTotal==true;
+		$fuenteIlum.setEncendidoParcial(false);
+		$fuenteIlum.setEncendidoTotal(true);
 end
 
 rule "Luz natural y artificial superan el umbral"
@@ -125,9 +125,9 @@ rule "Luz natural y artificial superan el umbral"
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
 		$juntos: NaturalArtificial(hvac=="Iluminación")
 	then
-		$juntos.getMayorUmbral()=true;
-		$fuenteIlum.getEncendidoTotal()=false;
-		$fuenteIlum.getEncendidoParcial()=true;
+		$juntos.setMayorUmbral(true);
+		$fuenteIlum.setEncendidoTotal(false);
+		$fuenteIlum.setEncendidoParcial(true);
 end
 
 rule "Luz natural y artificial no superan el umbral"
@@ -136,9 +136,9 @@ rule "Luz natural y artificial no superan el umbral"
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
 		$juntos: NaturalArtificial(hvac=="Iluminación")
 	then
-		$juntos.getMayorUmbral()=false;
-		$fuenteIlum.getEncendidoTotal()=true;
-		$fuenteIlum.getEncendidoParcial()=false;
+		$juntos.setMayorUmbral(false);
+		$fuenteIlum.setEncendidoTotal(true);
+		$fuenteIlum.setEncendidoParcial(false);
 end
 
 rule "Persona No Apagar luces"
@@ -146,8 +146,8 @@ rule "Persona No Apagar luces"
 		$pers: Persona(presencia==true && quiereEncender==true)
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
 	then
-		$fuenteIlum.getEncendidoTotal()=true;
-		$fuenteIlum.getEncendidoParcial()=false;
+		$fuenteIlum.setEncendidoTotal(true);
+		$fuenteIlum.setEncendidoParcial(false);
 end
 
 rule "Persona Apagar luces"
@@ -155,8 +155,8 @@ rule "Persona Apagar luces"
 		$pers: Persona(presencia==true && quiereEncender==false)
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
 	then
-		$fuenteIlum.getEncendidoTotal()=false;
-		$fuenteIlum.getEncendidoParcial()=false;
+		$fuenteIlum.setEncendidoTotal(false);
+		$fuenteIlum.setEncendidoParcial(false);
 end
 
 rule "Apagar luces No hay nadie"
@@ -164,8 +164,8 @@ rule "Apagar luces No hay nadie"
 		$pers: Persona(presencia==false)
 		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
 	then
-		$fuenteIlum.getEncendidoTotal()=false;
-		$fuenteIlum.getEncendidoParcial()=false;
+		$fuenteIlum.setEncendidoTotal(false);
+		$fuenteIlum.setEncendidoParcial(false);
 end
 
 //AC es aire acondicionado
