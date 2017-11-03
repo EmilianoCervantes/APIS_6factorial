@@ -62,6 +62,7 @@ rule "Carga hechos"
 		insert(new FuenteGastoEnergetico("Focos",true,ilum));
 		
 		insert(new Persona("Emilino",,));
+		insert(new Persona("Alison",12,17));
 		
 		insert(new RecursosNaturales(calef,"LuzNatural",6,18));
 end
