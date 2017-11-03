@@ -140,40 +140,40 @@ rule "Luz natural y artificial no superan el umbral"
 		$fuenteIlum.getEncendidoTotal()=true;
 		$fuenteIlum.getEncendidoParcial()=false;
 end
+
+rule "Persona No Apagar luces"
+	when
+		$pers: Persona(presencia==true && quiereEncender==true)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+	then
+		$fuenteIlum.getEncendidoTotal()=true;
+		$fuenteIlum.getEncendidoParcial()=false;
+end
+
+rule "Persona Apagar luces"
+	when
+		$pers: Persona(presencia==true && quiereEncender==false)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+	then
+		$fuenteIlum.getEncendidoTotal()=false;
+		$fuenteIlum.getEncendidoParcial()=false;
+end
+
+rule "Apagar luces No hay nadie"
+	when
+		$pers: Persona(presencia==false)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+	then
+		$fuenteIlum.getEncendidoTotal()=false;
+		$fuenteIlum.getEncendidoParcial()=false;
+end
+
 //AC es aire acondicionado
-rule "Gasto AC"
+rule "AC"
 	when
 	then
 end
-
-rule "Ahorro AC"
+rule "Calefaccion"
 	when
 	then
-end
-
-rule "Gasto Calefaccion"
-	when
-	then
-end
-
-rule "Ahorro Calefaccion"
-	when
-	then
-end
-
-rule "Hello World"
-    when
-        m : Message( status == Message.HELLO, myMessage : message )
-    then
-        System.out.println( myMessage );
-        m.setMessage( "Goodbye cruel world" );
-        m.setStatus( Message.GOODBYE );
-        update( m );
-end
-
-rule "GoodBye"
-    when
-        Message( status == Message.GOODBYE, myMessage : message )
-    then
-        System.out.println( myMessage );
 end
