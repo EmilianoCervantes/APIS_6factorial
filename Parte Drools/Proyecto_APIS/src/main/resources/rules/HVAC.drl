@@ -168,6 +168,34 @@ rule "Apagar luces No hay nadie"
 		$fuenteIlum.setEncendidoParcial(false);
 end
 
+rule "Acaba de llegar"
+	when
+		$pers: Persona(presencia==false)
+	then
+		$pers.getPresencia(true);
+end
+
+rule "Ya se va"
+	when
+		$pers: Persona(presencia==true)
+	then
+		$pers.setPresencia(false);
+end
+
+rule "Quiere encender"
+	when
+		$pers: Persona(quiereEncender==false)
+	then
+		$pers.setQuiereEncender(true);
+end
+
+rule "No quiere encender"
+	when
+		$pers: Persona(quiereEncender==true)
+	then
+		$pers.setQuiereEncender(false);
+end
+
 //AC es aire acondicionado
 rule "AC"
 	when
