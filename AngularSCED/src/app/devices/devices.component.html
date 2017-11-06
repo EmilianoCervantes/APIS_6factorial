@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="dropdown">
+        <button class="btn btn btn-info btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Todos
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Iluminación</a>
+            <a class="dropdown-item" href="#">Calefacción</a>
+            <a class="dropdown-item" href="#">Ventilación</a>
+            <a class="dropdown-item" href="#">Aire acondicionado</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <app-device-list></app-device-list>
+        </div>
+        <div class="col-6">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

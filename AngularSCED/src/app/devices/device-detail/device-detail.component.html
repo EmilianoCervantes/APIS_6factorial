@@ -1,0 +1,11 @@
+<div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+    <div class="card-block">
+        <h3 class="card-title">{{device.name}}</h3>
+        <hr>
+        <p class="card-text">Tipo: {{device.type}}</p>
+        <p class="card-text">Medida: {{device.measure}}</p>
+        <p class="card-text">Fecha: {{device.date}}</p>
+        <p class="card-text">Hora: {{device.time}}</p>
+        <a (click)="onConfig()" class="btn btn-primary">Configurar</a>
+    </div>
+</div>

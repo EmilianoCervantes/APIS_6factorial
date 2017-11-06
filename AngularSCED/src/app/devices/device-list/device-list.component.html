@@ -1,0 +1,3 @@
+<ul class="list-group">
+    <li *ngFor="let device of devices" class="list-group-item list-group-item-info" [routerLink]="device.id" routerLinkActive="bg-info">{{device.name}}</li>
+</ul>

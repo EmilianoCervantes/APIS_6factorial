@@ -1,0 +1,131 @@
+[
+    {
+        "id": "8923",
+        "name": "Lámpara oficina",
+        "type": "Iluminación",
+        "measure" : "Encendido",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "9843",
+        "name": "Luz baño",
+        "type": "Iluminación",
+        "measure" : "Apagado",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "4792",
+        "name": "Luz cocina",
+        "type": "Iluminación",
+        "measure" : "Encendido",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "2732",
+        "name": "Luz cochera",
+        "type": "Iluminación",
+        "measure" : "Encendido",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "4822",
+        "name": "Lámpara sala",
+        "type": "Iluminación",
+        "measure" : "Encendido",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "9922",
+        "name": "Calentador recámara",
+        "type": "Calefacción",
+        "id": "0001",
+        "measure" : "28",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "5830",
+        "name": "Calentador baño",
+        "type": "Calefacción",
+        "measure" : "32",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "8424",
+        "name": "Ventilador recámara",
+        "type": "Ventilación",
+        "measure" : "Medio",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "7932",
+        "name": "Ventilador sala",
+        "type": "Ventilación",
+        "measure" : "Bajo",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "8932",
+        "name": "Abanico techo cochera",
+        "type": "Ventilación",
+        "measure" : "Apagado",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "9872",
+        "name": "Ventilador recámara visitas",
+        "type": "Ventilación",
+        "measure" : "Bajo",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "0212",
+        "name": "AC comedor",
+        "type": "Aire acondicionado",
+        "measure" : "28",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "3402",
+        "name": "AC baño",
+        "type": "Aire acondicionado",
+        "measure" : "24",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "7922",
+        "name": "AC cocina",
+        "type": "Aire acondicionado",
+        "measure" : "23",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "1245",
+        "name": "AC recibidor",
+        "type": "Aire acondicionado",
+        "measure" : "29",
+        "date": "06-11-2017",
+        "time": "10:00"
+    },
+    {
+        "id": "6420",
+        "name": "AC recámara",
+        "type": "Aire acondicionado",
+        "measure" : "32",
+        "date": "06-11-2017",
+        "time": "10:00"
+    }
+]
