@@ -17,6 +17,7 @@ import { DeviceService } from './devices/device.service';
 import { DeviceStorageService } from './devices/device-storage.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DeviceEditComponent } from './devices/device-edit/device-edit.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
         DeviceConfigComponent,
         InitComponent,
         DeviceDetailComponent,
+        DeviceEditComponent,
     ],
     imports: [
         BrowserModule,
