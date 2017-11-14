@@ -2,10 +2,10 @@
 
 Repositorio del equipo.
 
-Contiene las reglas de negocio en Drools y la parte de conectividad web en Maven.
+Contiene las reglas de negocio en Drool, la parte de conectividad web en Maven y la aplicación web.
 
-La carpeta de AngularSCED contiene la vista web hecha en Angular donde se despliegan los dispositivos y los detalles de cada dispositivo.
+La carpeta de Angular contiene la vista web hecha en Angular donde se despliegan los dispositivos y los detalles de cada dispositivo.
 
-La carpeta Reglas/reglas-edificio-inteligente contiene la parte de Maven, el servidor que manda las reglas de Drools. Dentro contiene el archivo de reglas, .drl, y la conectividad con Angular.
+La carpeta Maven contiene el servidor que manda las reglas de Drools. Dentro contiene el archivo de reglas, .drl, y la conectividad para peticiones HTTP.
 
-La carpeta Parte Drools sólo son las reglas de negocio que se utilizarán para el proyecto. Esta carpeta sirve para visualizar las reglas que contiene el servidor en Maven.
+La carpeta Drools sólo son las reglas de negocio que se utilizarán para el proyecto. Esta carpeta sirve para visualizar las reglas que contiene el servidor en Maven.
