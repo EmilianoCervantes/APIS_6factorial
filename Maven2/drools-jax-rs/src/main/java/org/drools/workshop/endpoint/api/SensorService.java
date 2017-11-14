@@ -24,7 +24,7 @@ public interface SensorService {
 
     @GET
     @Produces("application/json")
-    @Path("")
+    @Path("/habitaciones")
     public List<Habitacion> getHabitaciones();
 
     @POST

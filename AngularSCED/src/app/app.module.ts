@@ -15,6 +15,7 @@ import { DeviceDetailComponent } from './devices/device-detail/device-detail.com
 
 import { DeviceService } from './devices/device.service';
 import { DeviceStorageService } from './devices/device-storage.service';
+import { ConexionMavenService } from './devices/conexion-maven.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DeviceEditComponent } from './devices/device-edit/device-edit.component';
@@ -37,7 +38,7 @@ import { DeviceEditComponent } from './devices/device-edit/device-edit.component
         ReactiveFormsModule,
         AppRoutingModule
     ],
-    providers: [DeviceService, DeviceStorageService, {
+    providers: [DeviceService, DeviceStorageService,ConexionMavenService, {
         provide: HTTP_INTERCEPTORS,
         useClass: HeadersInterceptor,
         multi: true
