@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Device } from '../../device.model';
 
 @Component({
   selector: 'app-device-item',
@@ -6,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./device-item.component.css']
 })
 export class DeviceItemComponent implements OnInit {
+	@Input() device: Device;
+	@Input() index: number;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }
