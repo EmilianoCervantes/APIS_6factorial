@@ -19,6 +19,7 @@ import { ConexionMavenService } from './devices/conexion-maven.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DeviceEditComponent } from './devices/device-edit/device-edit.component';
+import { DeviceItemComponent } from './devices/device-list/device-item/device-item.component';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import { DeviceEditComponent } from './devices/device-edit/device-edit.component
         InitComponent,
         DeviceDetailComponent,
         DeviceEditComponent,
+        DeviceItemComponent,
     ],
     imports: [
         BrowserModule,
