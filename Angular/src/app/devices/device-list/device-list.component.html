@@ -1,3 +1,11 @@
+<!--Forma original en la que habían establecido para los items
 <ul class="list-group">
     <li *ngFor="let device of devices" class="list-group-item list-group-item-info" [routerLink]="device.id" routerLinkActive="bg-info">{{device.nombreDispositivo}}</li>
-</ul>
+</ul>-->
+<!--Forma de Emiliano-->
+<div class="row">
+	<div class="col-xs-12">
+		<app-device-item  *ngFor="let deviceElem of devices; let i = index"
+			[device]="deviceElem" [index]="i"></app-device-item>
+	</div>
+</div>

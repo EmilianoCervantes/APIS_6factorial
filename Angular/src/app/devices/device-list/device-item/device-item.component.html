@@ -5,11 +5,10 @@
 	<div class="pull-left">
 		<!--device corresponde al @Input() device en el ts-->
 		<h4 class="list-group-item-heading">{{ device.name }}</h4>
-		<p class="list-group-item-text">{{ device.type }}</p>
-		<p class="list-group-item-text">{{ device.id }}</p>
+		<span class="list-group-item-text">{{ device.type }} | </span>
+		<span class="list-group-item-text">{{ device.id }}</span>
 	</div>
-	<span class="pull-right">
-		<!--<img src="{{ device.imagePath }}" alt="{{ device.name }}" class="img-responsive" style="max-height: 50px;">-->
+	<!--<span class="pull-right">
 		<img [src]="device.imagePath" alt="{{ device.name }}" class="img-responsive" style="max-height: 50px;">
-	</span>
+	</span>-->
 </a>
