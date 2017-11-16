@@ -22,6 +22,60 @@ rule "es medicion"
         System.out.println($m.getValor());
 end
 
+declare Valor
+	cuarto: Habitacion @key
+	consumo: int @key
+	horas: double @Key
+end
+
+rule "consumo promedio sala"
+     when
+	$h : Habitacion(nombreHabitacion == "Living Room" )
+     then
+	insert(new Valor($h,58,4.2));
+end
+
+rule "consumo promedio dormitorio"
+     when
+	$h : Habitacion(nombreHabitacion == "Bedroom" )
+     then
+	insert(new Valor($h,45,3.1));
+end
+
+rule "consumo promedio salon de estudio"
+     when
+	$h : Habitacion(nombreHabitacion == "Study Room" )
+     then
+	insert(new Valor($h,27,2.4));
+end
+
+rule "consumo promedio comedor"
+     when
+	$h : Habitacion(nombreHabitacion == "Dinning Room" )
+     then
+	insert(new Valor($h,28,2.0));
+end
+
+rule "consumo promedio cocina"
+     when
+	$h : Habitacion(nombreHabitacion == "Kitchen" )
+     then
+	insert(new Valor($h,18,1.9));
+end
+
+rule "consumo promedio baño"
+     when
+	$h : Habitacion(nombreHabitacion == "Bathroom" )
+     then
+	insert(new Valor($h,20,1.9));
+end
+
+rule "consumo promedio"
+     when
+	$h : Habitacion(nombreHabitacion == "Otro" )
+     then
+	insert(new Valor($h,14,2.1));
+end
 
 //Una sola declaracion
 //En vez de tener que declarar por cada tipo de sensor
@@ -78,9 +132,9 @@ rule "Carga hechos"
 	then
 		TipoHVAC ac = new TipoHVAC("AC");
 		insert(ac);
-		TipoHVAC calef = new TipoHVAC("Calefaccin");
+		TipoHVAC calef = new TipoHVAC("Calefacción");
 		insert(calef);
-		TipoHVAC ilum = new TipoHVAC("Iluminacin");
+		TipoHVAC ilum = new TipoHVAC("Iluminación");
 		insert(ilum);
 
 		//Por el momento dejar uno de cada clase
@@ -187,9 +241,13 @@ rule "Apagar luces No hay nadie"
 end
 
 //AC es aire acondicionado
-rule "AC"
+rule "Apagar aire cuando no hay nadie"
 	when
+		$pers: Persona(presencia==false)
+		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "Calefacción")
 	then
+		$aireAcondicionado.setEncendidoTotal(false);
+		$aireAcondicionado.setEncendidoParcial(false);
 end
 rule "Calefaccion"
 	when
