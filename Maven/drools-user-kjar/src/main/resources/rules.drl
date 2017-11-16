@@ -56,6 +56,14 @@ rule "consumo promedio comedor"
 	insert(new Valor($h,28,2.0));
 end
 
+rule "imprimir valores"
+     when
+	$v : Valor()
+     then
+	System.out.println($v);
+end
+
+
 rule "consumo promedio cocina"
      when
 	$h : Habitacion(nombreHabitacion == "Kitchen" )
