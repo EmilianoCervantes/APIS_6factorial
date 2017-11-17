@@ -22,11 +22,7 @@ rule "es medicion"
         System.out.println($m.getValor());
 end
 
-declare Valor
-	cuarto: Habitacion @key
-	consumo: int @key
-	horas: double @Key
-end
+
 
 rule "consumo promedio sala"
      when
