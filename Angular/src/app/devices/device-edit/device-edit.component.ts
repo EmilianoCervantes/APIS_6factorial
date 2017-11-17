@@ -46,5 +46,6 @@ export class DeviceEditComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.deviceForm);
   }
 }

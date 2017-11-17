@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]="deviceForm">
+    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
           <button type="submit" class="btn btn-success">Guardar</button>
@@ -21,7 +21,7 @@
         <div class="col-xs-12">
           <div class="form-group">
             <label for="type">Tipo</label>
-            <input type="text" id="type" formControlType="type" class="form-control">
+            <input type="text" id="type" formControlName="type" class="form-control">
           </div>
         </div>
       </div>
