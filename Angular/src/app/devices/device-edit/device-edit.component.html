@@ -1,7 +1,47 @@
 <div class="row">
   <div class="col-xs-12">
+    <form>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="button" class="btn btn-danger">Cancelar</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="type">Tipo</label>
+            <input type="text" id="type" class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" class="form-control">
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-xs-12">
     <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-      <!--Botones-->
       <div class="row">
         <div class="col-xs-12">
           <button type="submit"
@@ -10,7 +50,6 @@
           <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
         </div>
       </div>
-      <!--Input nombre de la receta-->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -21,7 +60,6 @@
           </div>
         </div>
       </div>
-      <!--Input para añadir la imagen-->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -34,13 +72,11 @@
           </div>
         </div>
       </div>
-      <!--Preview de la imagen-->
       <div class="row">
         <div class="col-xs-12">
           <img [src]="imagePath.value" class="img-responsive">
         </div>
       </div>
-      <!--Input descripción de la receta-->
       <div class="row">
         <div class="col-xs-12">
           <div class="form-group">
@@ -52,14 +88,8 @@
           </div>
         </div>
       </div>
-      <!--Añadir ingredientes de la receta-->
-      <!--Se utilizará un array de controls-->
       <div class="row">
-        <!--Se inserta la directiva en este div
-          porque es el que envuelve toda la sección.
-        -->
         <div class="col-xs-12" formArrayName="ingredients">
-          <!--Nombre del ingrediente-->
           <div class="row"
           *ngFor="let ingredientCtrl of recipeForm.get('ingredients').controls; let i = index"
             [formGroupName]="i"
@@ -69,13 +99,11 @@
                 formControlName="name"
                 class="form-control">
             </div>
-            <!--Cantidad del ingrediente-->
             <div class="col-xs-2">
               <input type="number"
                 formControlName="amount"
                 class="form-control">
             </div>
-            <!--Eliminar el ingrediente-->
             <div class="col-xs-2">
               <button class="btn btn-danger"
                 type="button"
@@ -93,4 +121,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
