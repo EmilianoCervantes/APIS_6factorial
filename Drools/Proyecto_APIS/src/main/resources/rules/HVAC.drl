@@ -1,18 +1,35 @@
 package com.sample
- 
-import com.sample.DroolsTest.Message;
-//Creen al menos 10 reglas en Drools...
-//de las cuales se implementen las dos de la figura 9 del artículo.
+
+rule "es dispositivo"
+    when
+        $d: Dispositivo()
+    then
+        System.out.println($d.getNombreDispositivo());
+end
+
+rule "es habitacion"
+    when
+        $h: Habitacion()
+    then
+        System.out.println($h.getNombreHabitacion());
+end
+
+rule "es medicion"
+    when
+        $m: Medicion()
+    then
+        System.out.println($m.getValor());
+end
 
 
-//Una sola declaración
+//Una sola declaracion
 //En vez de tener que declarar por cada tipo de sensor
 //declare Sensor
 	//nombre: String @key
 	//Que HVAC/Climatiazacion analiza
 	//tipoClimatizacion: TipoHVAC @key
 	//Teoricamente sensores siempre encendidos...
-	//Pero puede haber algún caso inesperado
+	//Pero puede haber algï¿½n caso inesperado
 	//encendido: boolean @key
 	//presenciaDetectada: boolean @key
 //end
@@ -24,7 +41,7 @@ declare Persona
 	presencia: boolean @key
 	quiereEncender: boolean @key
 	//presenciaInicio: int @key
-	//presenciaFin: int @key 
+	//presenciaFin: int @key
 end
 
 declare FuenteGasto
@@ -55,65 +72,65 @@ declare NaturalArtificial
 end
 
 //Tsp=set point temperature, trec=recovery time
-//Iluminación como electricidad
+//Iluminaciï¿½n como electricidad
 rule "Carga hechos"
 	then
 		TipoHVAC ac = new TipoHVAC("AC");
 		insert(ac);
-		TipoHVAC calef = new TipoHVAC("Calefacción");
+		TipoHVAC calef = new TipoHVAC("Calefaccin");
 		insert(calef);
-		TipoHVAC ilum = new TipoHVAC("Iluminación");
+		TipoHVAC ilum = new TipoHVAC("Iluminacin");
 		insert(ilum);
-		
-		//Por el momento dejaré uno de cada clase
+
+		//Por el momento dejar uno de cada clase
 		//insert(new FuenteGastoEnergetico("ACuno",false,ac));
 		//insert(new FuenteGastoEnergetico("Calentador",false,calef));
 		//insert(new FuenteGastoEnergetico("Focos",false,ilum));
 		insert(new FuenteGasto(false,false,ac));
 		insert(new FuenteGasto(false,false,calef));
 		insert(new FuenteGasto(false,false,ilum));
-		
+
 		insert(new Persona("Emilino",true,true));
-		
+
 		//insert(new FuenteNatural(ilum,"LuzNatural",true));
 		//insert(new FuenteNatural(calef,"Sol",true));
 		//insert(new FuenteNatural(ac,"Ventana abierta",true));
 		insert(new FuenteNatural(ilum,true,false));
 		insert(new FuenteNatural(calef,true,false));
 		insert(new FuenteNatural(ac,true,false));
-		
+
 		insert(new NaturalArtificial(ilum,false));
 end
 
 rule "Encender luces"
 	when
 		$persona: Persona(quiereEncender == true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoHvac=="Iluminación")
+		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoHvac=="Iluminaciï¿½n")
 	then
 		$fuenteIlum.setEncendido(true);
 end
 
-rule "Hay luz de día suficiente"
+rule "Hay luz de dia suficiente"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminaciï¿½n" && presenciaTotal==true)
+		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminaciï¿½n")
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(false);
 end
-rule "No hay luz de día suficiente"
+rule "No hay luz de dia suficiente"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminaciï¿½n" && presenciaTotal==false && presenciaParcial==true)
+		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac=="Iluminaciï¿½n")
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(true);
 end
 
-rule "No hay luz de día"
+rule "No hay luz de dia"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminación" &&presenciaTotal==false &&presenciaParcial==false)
-		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminacion" &&presenciaTotal==false &&presenciaParcial==false)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminacion")
 	then
 		$fuenteIlum.setEncendidoParcial(false);
 		$fuenteIlum.setEncendidoTotal(true);
@@ -121,9 +138,9 @@ end
 
 rule "Luz natural y artificial superan el umbral"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminación" && (presenciaTotal==true || presenciaParcial==true))
-		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
-		$juntos: NaturalArtificial(hvac=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminaciï¿½n" && (presenciaTotal==true || presenciaParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminacion"&&(encendidoTotal==true||encendidoParcial==true))
+		$juntos: NaturalArtificial(hvac=="Iluminacion")
 	then
 		$juntos.setMayorUmbral(true);
 		$fuenteIlum.setEncendidoTotal(false);
@@ -132,9 +149,9 @@ end
 
 rule "Luz natural y artificial no superan el umbral"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminación" && presenciaTotal==false && presenciaParcial==false)
-		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
-		$juntos: NaturalArtificial(hvac=="Iluminación")
+		$ilum: FuenteNatural(hvac=="Iluminaciï¿½n" && presenciaTotal==false && presenciaParcial==false)
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
+		$juntos: NaturalArtificial(hvac=="Iluminaciï¿½n")
 	then
 		$juntos.setMayorUmbral(false);
 		$fuenteIlum.setEncendidoTotal(true);
@@ -144,7 +161,7 @@ end
 rule "Persona No Apagar luces"
 	when
 		$pers: Persona(presencia==true && quiereEncender==true)
-		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
 	then
 		$fuenteIlum.setEncendidoTotal(true);
 		$fuenteIlum.setEncendidoParcial(false);
@@ -153,7 +170,7 @@ end
 rule "Persona Apagar luces"
 	when
 		$pers: Persona(presencia==true && quiereEncender==false)
-		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(false);
@@ -162,38 +179,10 @@ end
 rule "Apagar luces No hay nadie"
 	when
 		$pers: Persona(presencia==false)
-		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminación"&&(encendidoTotal==true||encendidoParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac=="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(false);
-end
-
-rule "Acaba de llegar"
-	when
-		$pers: Persona(presencia==false)
-	then
-		$pers.getPresencia(true);
-end
-
-rule "Ya se va"
-	when
-		$pers: Persona(presencia==true)
-	then
-		$pers.setPresencia(false);
-end
-
-rule "Quiere encender"
-	when
-		$pers: Persona(quiereEncender==false)
-	then
-		$pers.setQuiereEncender(true);
-end
-
-rule "No quiere encender"
-	when
-		$pers: Persona(quiereEncender==true)
-	then
-		$pers.setQuiereEncender(false);
 end
 
 //AC es aire acondicionado
