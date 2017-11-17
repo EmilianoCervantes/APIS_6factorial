@@ -97,6 +97,16 @@ public class SensorServiceImpl implements SensorService {
         return mediciones;
     }
 
+      @Override
+    public List<Valor> getValores() {
+        List<Valor> valores = new ArrayList<Valor>();
+        for (Object o : kSession.getObjects()) {
+            if (o instanceof Valor) {
+                valores.add((Valor) o);
+            }
+        }
+        return valores;
+    }
 
     private void printKieSessionAllFacts(KieSession kSession) {
         System.out.println(" >> Start - Printing All Facts in the Kie Session");

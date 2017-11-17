@@ -48,4 +48,9 @@ public interface SensorService {
     @Produces("application/json")
     @Path("/mediciones")
     public List<Medicion> getMediciones();
+
+    @GET
+    @Produces("application/json")
+    @Path("/valores")
+    public List<Valor> getValores();
 }
