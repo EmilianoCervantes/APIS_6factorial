@@ -54,7 +54,7 @@ end
 
 rule "imprimir valores"
      when
-	$v : Valor()
+	     $v : Valor()
      then
 	System.out.println($v);
 end
@@ -62,7 +62,7 @@ end
 
 rule "consumo promedio cocina"
      when
-	$h : Habitacion(nombreHabitacion == "Kitchen" )
+	    $h : Habitacion(nombreHabitacion == "Kitchen" )
      then
 	insert(new Valor($h,18,1.9));
 end
@@ -80,6 +80,8 @@ rule "consumo promedio"
      then
 	insert(new Valor($h,14,2.1));
 end
+
+/*
 
 //Una sola declaracion
 //En vez de tener que declarar por cada tipo de sensor
@@ -274,7 +276,7 @@ rule "Activar aire cuando hay personas y hay ventana"
 		$aireAcondicionado.setEncendidoParcial(true);
 end
 
-/*
+
 rule "Calefaccion"
 	when
 	then
