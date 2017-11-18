@@ -14,6 +14,14 @@ public class Valor {
   private int consumo;
   private double hora;
 
+  public Valor(){}
+
+  public Valor(Habitacion habitacion, int consumo, double hora){
+    this.habitacion = habitacion;
+    this.consumo = consumo;
+    this.hora = hora;
+  }
+
   public Integer getConsumo() {
       return consumo;
   }
