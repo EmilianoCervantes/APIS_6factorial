@@ -253,7 +253,29 @@ rule "Apagar aire cuando no hay nadie"
 		$aireAcondicionado.setEncendidoTotal(false);
 		$aireAcondicionado.setEncendidoParcial(false);
 end
+
+rule "Activar aire cuando hay personas y no ventana"
+	when
+		$pers: Persona(presencia==true)
+		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "Calefacción")
+		$ventana: FuenteNatural(hvac.getHVAC() == "Calefacción" && presenciaTotal == false)
+	then
+		$aireAcondicionado.setEncendidoTotal(true);
+		$aireAcondicionado.setEncendidoParcial(false);
+end
+
+rule "Activar aire cuando hay personas y hay ventana"
+	when
+		$pers: Persona(presencia==true)
+		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "Calefacción")
+		$ventana: FuenteNatural(hvac.getHVAC() == "Calefacción" && presenciaTotal == true)
+	then
+		$aireAcondicionado.setEncendidoTotal(false);
+		$aireAcondicionado.setEncendidoParcial(true);
+end
+
+/*
 rule "Calefaccion"
 	when
 	then
-end
+end*/
