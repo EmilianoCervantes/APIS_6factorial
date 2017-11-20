@@ -13,7 +13,7 @@ export class DeviceStorageService {
     storeDevice(devices: any[]) {
         return this.http.post('', devices);
     }*/
-    /*getDevices() {
+    getDevices() {
         let headers = new Headers();
         let opts = new RequestOptions();
         opts.headers = headers;
@@ -22,8 +22,8 @@ export class DeviceStorageService {
             const devices: Device[] = response.json();
             this.deviceService.setDevices(devices);
         });
-    }*/
-    getDevices() {
+    }
+    /*getDevices() {
         let headers = new Headers();
         let opts = new RequestOptions();
         opts.headers = headers;
@@ -32,5 +32,5 @@ export class DeviceStorageService {
             const devices: Device[] = response.json();
             this.deviceService.setDevices(devices);
         });
-    }
+    }*/
 }
