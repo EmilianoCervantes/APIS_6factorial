@@ -20,7 +20,7 @@ public class Dispositivo {
 	  this.idDispositivo = id;
 	  this.nombreDispositivo = nombre;
 	  this.tipoDispositivo = tipo;
-	  this.idForaneoHabitacion = idForeaneo;
+	  this.idForaneoHabitacion = idForaneo;
   }
 
   public Integer getIdDispositivo() {
