@@ -23,7 +23,9 @@ export class DeviceStorageService {
             this.deviceService.setDevices(devices);
         });
     }*/
-    getDevices() {
+    
+    //No funcionó hasta el momento com mapeo
+    /*getDevices() {
         let headers = new Headers();
         let opts = new RequestOptions();
         opts.headers = headers;
@@ -36,6 +38,16 @@ export class DeviceStorageService {
             )
             .subscribe(
                 (devices: Device[]) => {
+                this.deviceService.setDevices(devices);
+            });
+    }*/
+    getDevices() {
+        let headers = new Headers();
+        let opts = new RequestOptions();
+        opts.headers = headers;
+        this.http.get('http://localhost:8080/api/sensores/dispositivos')
+            .subscribe((response: Response) => {
+                const devices: Device[] = response.json();
                 this.deviceService.setDevices(devices);
             });
     }
