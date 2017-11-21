@@ -40,12 +40,28 @@ export class DeviceEditComponent implements OnInit {
     }
 
     this.deviceForm = new FormGroup({
-      'name': new FormControl(deviceName),
-      'type': new FormControl(deviceType)
+      'name': new FormControl(deviceName, Validators.required),
+      'type': new FormControl(deviceType, Validators.required)
     });
   }
 
   onSubmit(){
-    console.log(this.deviceForm);
+    //console.log(this.deviceForm)
+    /*const newDevice = new Device(this.deviceForm.value['id'],
+      this.deviceForm.value['name'],
+      this.deviceForm.value['type'],
+      this.deviceForm.value['measure'],
+      this.deviceForm.value['date'],
+      this.deviceForm.value['time']);*/
+    if(this.editMode){
+      this.deviceService.updateDevice(this.id, this.deviceForm.value);
+    } else {
+      this.deviceService.addDevice(this.deviceForm.value);
+    }
+    this.onCancel();
+  }
+
+  onCancel(){
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

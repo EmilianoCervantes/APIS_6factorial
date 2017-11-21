@@ -30,4 +30,9 @@ export class DeviceDetailComponent implements OnInit {
         this.router.navigate(['config'], { relativeTo: this.route });
     }
 
+    onDelete(){
+        this.deviceService.deleteDevice(this.id);
+        this.router.navigate(['/dispositivos']);
+    }
+
 }
