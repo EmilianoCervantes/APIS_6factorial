@@ -27,4 +27,8 @@ export class DeviceConfigComponent implements OnInit {
         this.router.navigate(['edit'], { relativeTo: this.route });
     }
 
+    onReturn(){
+        this.router.navigate(['../'], { relativeTo: this.route });
+    }
+
 }
