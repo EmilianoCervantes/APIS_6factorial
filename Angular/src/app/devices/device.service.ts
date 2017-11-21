@@ -9,6 +9,7 @@ export class DeviceService {
     private devices: Device[];
 
     getDevices() {
+        console.log(this.devices);
         return this.devices.slice();
     }
 
