@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Params, Router } from '@angular/router';
-
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-signin',
@@ -21,10 +21,15 @@ export class SigninComponent implements OnInit {
   	const password = form.value.password;
   	this.authService.signinUser(email, password);
   	const idToken = '';
-  	if(this.authService.isAuthenticated()){
+  	var numbers = Observable.timer(2000);
+  	numbers.subscribe(x =>{
+      //alert(this.authService.isAuthenticated());
+      console.log(this.authService.isAuthenticated());
+    });
+  	/*if(this.authService.isAuthenticated()){
   		this.onPass();
   	}
-  	this.onPass();
+  	this.onPass();*/
   }
 
   onPass() {

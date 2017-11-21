@@ -1,13 +1,5 @@
 <div class="jumbotron bg-primary">
-	<ul class="navbar-nav">
-		<!--<li class="nav-item" *ngIf="!authService.isAuthenticated()">
-			<a routerLink="/signin" class="btn float-right">Ingresar</a>
-		</li>-->
-		<li class="nav-item" *ngIf="authService.isAuthenticated()">
-			<a routerLink="/" class="btn btn-info float-right">Salir</a>
-		</li>
-	</ul>
-	<a routerLink="/" class="btn btn-info float-right">Salir</a>
+	<button routerLink="/" *ngIf="authService.isAuthenticated()" class="btn btn-info float-right">Salir</button>
     <h1 class="display-3"><b>SCED</b></h1>
     <p class="lead">Administración de dispositivos eléctricos</p>
 </div>
