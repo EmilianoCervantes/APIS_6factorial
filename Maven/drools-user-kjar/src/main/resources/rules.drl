@@ -1,11 +1,6 @@
 package org.drools.workshop;
 import org.drools.workshop.model.*;
 
-rule "carga dispositivos"
-     then
-          insert(new Dispositivo(95,"Lampara","Iluminacion"));
-          insert(new Dispositivo(37,"Calentador","Calefaccion"));
-end
 
 rule "es dispositivo"
     when
@@ -35,6 +30,8 @@ rule "consumo promedio sala"
 	$h : Habitacion(nombreHabitacion == "Living Room" )
      then
 	insert(new Valor($h,58,4.2));
+  insert(new Dispositivo(95,"Lampara","Iluminacion",1));
+  insert(new Dispositivo(37,"Calentador","Calefaccion",1));
 end
 
 rule "consumo promedio dormitorio"
@@ -73,7 +70,7 @@ rule "consumo promedio cocina"
 	insert(new Valor($h,18,1.9));
 end
 
-rule "consumo promedio baÃ±o"
+rule "consumo promedio baño"
      when
 	$h : Habitacion(nombreHabitacion == "Bathroom" )
      then
@@ -96,7 +93,7 @@ end
 	//Que HVAC/Climatiazacion analiza
 	//tipoClimatizacion: TipoHVAC @key
 	//Teoricamente sensores siempre encendidos...
-	//Pero puede haber algï¿½n caso inesperado
+	//Pero puede haber algun caso inesperado
 	//encendido: boolean @key
 	//presenciaDetectada: boolean @key
 //end
@@ -147,14 +144,14 @@ declare NaturalArtificial
 end
 
 //Tsp=set point temperature, trec=recovery time
-//Iluminaciï¿½n como electricidad
+//Iluminacion como electricidad
 rule "Carga hechos"
 	then
 		TipoHVAC ac = new TipoHVAC("AC");
 		insert(ac);
-		TipoHVAC calef = new TipoHVAC("CalefacciÃ³n");
+		TipoHVAC calef = new TipoHVAC("Calefacción");
 		insert(calef);
-		TipoHVAC ilum = new TipoHVAC("IluminaciÃ³n");
+		TipoHVAC ilum = new TipoHVAC("Iluminación");
 		insert(ilum);
 
 		//Por el momento dejar uno de cada clase
@@ -180,23 +177,23 @@ end
 rule "Encender luces"
 	when
 		$persona: Persona(quiereEncender == true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoHvac.getHVAC() =="Iluminaciï¿½n")
+		$fuenteIlum: FuenteGasto(encendidoTotal==false && tipoHvac.getHVAC() =="Iluminacion")
 	then
 		$fuenteIlum.setEncendidoTotal(true);
 end
 
 rule "Hay luz de dia suficiente"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminaciï¿½n" && presenciaTotal==true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac.getHVAC() =="Iluminaciï¿½n")
+		$ilum: FuenteNatural(hvac=="Iluminacion" && presenciaTotal==true)
+		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac.getHVAC() =="Iluminacion")
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(false);
 end
 rule "No hay luz de dia suficiente"
 	when
-		$ilum: FuenteNatural(hvac=="Iluminaciï¿½n" && presenciaTotal==false && presenciaParcial==true)
-		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac.getHVAC() =="Iluminaciï¿½n")
+		$ilum: FuenteNatural(hvac=="Iluminacion" && presenciaTotal==false && presenciaParcial==true)
+		$fuenteIlum: FuenteGasto(encendidoTotal==true && tipoHvac.getHVAC() =="Iluminacion")
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(true);
@@ -213,7 +210,7 @@ end
 
 rule "Luz natural y artificial superan el umbral"
 	when
-		$ilum: FuenteNatural(hvac.getHVAC()=="Iluminaciï¿½n" && (presenciaTotal==true || presenciaParcial==true))
+		$ilum: FuenteNatural(hvac.getHVAC()=="Iluminacion" && (presenciaTotal==true || presenciaParcial==true))
 		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminacion"&&(encendidoTotal==true||encendidoParcial==true))
 		$juntos: NaturalArtificial(hvac.getHVAC() =="Iluminacion")
 	then
@@ -224,9 +221,9 @@ end
 
 rule "Luz natural y artificial no superan el umbral"
 	when
-		$ilum: FuenteNatural(hvac.getHVAC() =="Iluminaciï¿½n" && presenciaTotal==false && presenciaParcial==false)
-		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
-		$juntos: NaturalArtificial(hvac.getHVAC() =="Iluminaciï¿½n")
+		$ilum: FuenteNatural(hvac.getHVAC() =="Iluminacion" && presenciaTotal==false && presenciaParcial==false)
+		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminacion"&&(encendidoTotal==true||encendidoParcial==true))
+		$juntos: NaturalArtificial(hvac.getHVAC() =="Iluminacion")
 	then
 		$juntos.setMayorUmbral(false);
 		$fuenteIlum.setEncendidoTotal(true);
@@ -236,7 +233,7 @@ end
 rule "Persona No Apagar luces"
 	when
 		$pers: Persona(presencia==true && quiereEncender==true)
-		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminacion"&&(encendidoTotal==true||encendidoParcial==true))
 	then
 		$fuenteIlum.setEncendidoTotal(true);
 		$fuenteIlum.setEncendidoParcial(false);
@@ -245,7 +242,7 @@ end
 rule "Persona Apagar luces"
 	when
 		$pers: Persona(presencia==true && quiereEncender==false)
-		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminacion"&&(encendidoTotal==true||encendidoParcial==true))
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(false);
@@ -254,7 +251,7 @@ end
 rule "Apagar luces No hay nadie"
 	when
 		$pers: Persona(presencia==false)
-		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminaciï¿½n"&&(encendidoTotal==true||encendidoParcial==true))
+		$fuenteIlum: FuenteGasto(tipoHvac.getHVAC() =="Iluminacion"&&(encendidoTotal==true||encendidoParcial==true))
 	then
 		$fuenteIlum.setEncendidoTotal(false);
 		$fuenteIlum.setEncendidoParcial(false);
@@ -264,7 +261,7 @@ end
 rule "Apagar aire cuando no hay nadie"
 	when
 		$pers: Persona(presencia==false)
-		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "CalefacciÃ³n")
+		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "Calefacción")
 	then
 		$aireAcondicionado.setEncendidoTotal(false);
 		$aireAcondicionado.setEncendidoParcial(false);
@@ -273,8 +270,8 @@ end
 rule "Activar aire cuando hay personas y no ventana"
 	when
 		$pers: Persona(presencia==true)
-		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "CalefacciÃ³n")
-		$ventana: FuenteNatural(hvac.getHVAC() == "CalefacciÃ³n" && presenciaTotal == false)
+		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "Calefacción")
+		$ventana: FuenteNatural(hvac.getHVAC() == "Calefacción" && presenciaTotal == false)
 	then
 		$aireAcondicionado.setEncendidoTotal(true);
 		$aireAcondicionado.setEncendidoParcial(false);
@@ -283,8 +280,8 @@ end
 rule "Activar aire cuando hay personas y hay ventana"
 	when
 		$pers: Persona(presencia==true)
-		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "CalefacciÃ³n")
-		$ventana: FuenteNatural(hvac.getHVAC() == "CalefacciÃ³n" && presenciaTotal == true)
+		$aireAcondicionado: FuenteGasto(tipoHvac.getHVAC() == "Calefacción")
+		$ventana: FuenteNatural(hvac.getHVAC() == "Calefacción" && presenciaTotal == true)
 	then
 		$aireAcondicionado.setEncendidoTotal(false);
 		$aireAcondicionado.setEncendidoParcial(true);
