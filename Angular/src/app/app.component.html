@@ -1,5 +1,5 @@
 <div class="jumbotron bg-primary">
-	<button routerLink="/" *ngIf="authService.isAuthenticated()" class="btn btn-info float-right">Salir</button>
+	<button routerLink="/" *ngIf="authService.isAuthenticated()" class="btn btn-info float-right" (click)="onLogout()">Salir</button>
     <h1 class="display-3"><b>SCED</b></h1>
     <p class="lead">Administración de dispositivos eléctricos</p>
 </div>

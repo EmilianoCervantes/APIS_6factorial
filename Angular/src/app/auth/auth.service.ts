@@ -18,7 +18,7 @@ export class AuthService {
 				this.token = "siHubo"
 			},
 			response => {
-				firebase.auth().currentUser.getToken()
+				firebase.auth().currentUser.getIdToken()
 				.then(
 					(token: string) => this.token
 				)
@@ -39,5 +39,10 @@ export class AuthService {
 
 	isAuthenticated() {
 		return this.token != null;
+	}
+
+	logout(){
+		firebase.auth().signOut;
+		this.token = null;
 	}
 }
