@@ -21,15 +21,23 @@ export class SigninComponent implements OnInit {
   	const password = form.value.password;
   	this.authService.signinUser(email, password);
   	const idToken = '';
-  	var numbers = Observable.timer(2000);
+  	/*var numbers = Observable.timer(2000);
   	numbers.subscribe(x =>{
       //alert(this.authService.isAuthenticated());
       console.log(this.authService.isAuthenticated());
     });
-  	/*if(this.authService.isAuthenticated()){
+  	if(this.authService.isAuthenticated()){
   		this.onPass();
-  	}
-  	this.onPass();*/
+  	}*/
+  	//this.onPass();
+  	var numbers = Observable.timer(2000);
+  	numbers.subscribe(x =>{
+      //alert(this.authService.isAuthenticated());
+      console.log(this.authService.isAuthenticated());
+      if(this.authService.isAuthenticated()){
+  		this.onPass();
+  	  }
+    });
   }
 
   onPass() {
