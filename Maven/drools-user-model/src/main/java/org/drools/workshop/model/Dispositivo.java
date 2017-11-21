@@ -15,6 +15,13 @@ public class Dispositivo {
   private Integer idForaneoHabitacion;
 
   public Dispositivo(){}
+  
+  public Dispositivo(Integer id, String nombre, String tipo, Integer idForaneo){
+	  this.idDispositivo = id;
+	  this.nombreDispositivo = nombre;
+	  this.tipoDispositivo = tipo;
+	  this.idForaneoHabitacion = idForeaneo;
+  }
 
   public Integer getIdDispositivo() {
       return idDispositivo;

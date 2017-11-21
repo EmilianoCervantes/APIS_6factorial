@@ -1,6 +1,12 @@
 package org.drools.workshop;
 import org.drools.workshop.model.*;
 
+rule "carga dispositivos"
+     then
+          insert(new Dispositivo(95,"Lampara","Iluminacion"));
+          insert(new Dispositivo(37,"Calentador","Calefaccion"));
+end
+
 rule "es dispositivo"
     when
         $d: Dispositivo()
