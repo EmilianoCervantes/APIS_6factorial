@@ -35,8 +35,8 @@ export class DeviceEditComponent implements OnInit {
 
     if(this.editMode){
       const device = this.deviceService.getDevice(this.id);
-      deviceName = device.name;
-      deviceType = device.type;
+      deviceName = device.nombreDispositivo;
+      deviceType = device.tipoDispositivo;
     }
 
     this.deviceForm = new FormGroup({
