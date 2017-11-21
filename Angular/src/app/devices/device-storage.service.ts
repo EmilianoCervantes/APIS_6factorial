@@ -28,9 +28,15 @@ export class DeviceStorageService {
         let opts = new RequestOptions();
         opts.headers = headers;
         this.http.get('http://localhost:8080/api/sensores/dispositivos')
-            .subscribe((response: Response) => {
-            const devices: Device[] = response.json();
-            this.deviceService.setDevices(devices);
-        });
+            .map(
+                (response: Response) => {
+                    const devices: Device[] = response.json();
+                    return devices;
+                }
+            )
+            .subscribe(
+                (devices: Device[]) => {
+                this.deviceService.setDevices(devices);
+            });
     }
 }
