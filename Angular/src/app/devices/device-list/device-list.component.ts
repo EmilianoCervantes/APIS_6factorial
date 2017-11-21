@@ -21,17 +21,17 @@ export class DeviceListComponent implements OnInit, OnDestroy {
                 private http:Http) { }
 
     ngOnInit() {
-        this.http.get("http://localhost:8080/api/sensores/dispositivos").subscribe(res => {console.log(res); this.devices = res.json()});
-        /*this.subcription = this.deviceService.deviceChanged.subscribe(
+        //this.http.get("http://localhost:8080/api/sensores/dispositivos").subscribe(res => {console.log(res); this.devices = res.json()});
+        this.subcription = this.deviceService.deviceChanged.subscribe(
             (devices: Device[]) => {
                 this.devices = devices;
             }
         );
-        this.deviceStorageService.getDevices();*/
+        this.deviceStorageService.getDevices();
         //this.deviceStorageService.getDevices();
     }
 
-    
+
 
     ngOnDestroy() {
         this.subcription.unsubscribe();

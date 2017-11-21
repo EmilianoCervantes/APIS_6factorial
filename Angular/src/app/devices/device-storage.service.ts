@@ -22,7 +22,7 @@ export class DeviceStorageService {
             const devices: Device[] = response.json();
             this.deviceService.setDevices(devices);
         });
-    }
+    }*/
     getDevices() {
         let headers = new Headers();
         let opts = new RequestOptions();
@@ -32,5 +32,5 @@ export class DeviceStorageService {
             const devices: Device[] = response.json();
             this.deviceService.setDevices(devices);
         });
-    }*/
+    }
 }
