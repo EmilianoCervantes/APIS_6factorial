@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { AuthService } from './auth/auth.service';
+
+import * as firebase from 'firebase';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -12,12 +16,15 @@ export class AppComponent implements OnInit {
     results: string[];
 
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private authService: AuthService) {
 
     }
 
-    ngOnInit(): void {
-        
+    ngOnInit() {
+        firebase.initializeApp({
+            apiKey: "AIzaSyDVyybs760SuiHnvz2DqdHzQdIsLJimlXA",
+            authDomain: "dipositivos-apis.firebaseapp.com",
+        })
         
 
         /*let header = new HttpHeaders({'Access-Control-Allow-Origin':'*'});

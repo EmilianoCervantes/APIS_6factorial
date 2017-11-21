@@ -20,6 +20,9 @@ import { ConexionMavenService } from './devices/conexion-maven.service';
 import { AppRoutingModule } from './app-routing.module';
 import { DeviceEditComponent } from './devices/device-edit/device-edit.component';
 import { DeviceItemComponent } from './devices/device-list/device-item/device-item.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
     declarations: [
@@ -31,6 +34,8 @@ import { DeviceItemComponent } from './devices/device-list/device-item/device-it
         DeviceDetailComponent,
         DeviceEditComponent,
         DeviceItemComponent,
+        SignupComponent,
+        SigninComponent,
     ],
     imports: [
         BrowserModule,
@@ -44,8 +49,8 @@ import { DeviceItemComponent } from './devices/device-list/device-item/device-it
         provide: HTTP_INTERCEPTORS,
         useClass: HeadersInterceptor,
         multi: true
-    }
-    ],
+    },
+    AuthService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
