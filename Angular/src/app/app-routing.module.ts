@@ -8,14 +8,15 @@ import { DeviceConfigComponent } from './devices/device-config/device-config.com
 import { DeviceEditComponent } from './devices/device-edit/device-edit.component';
 //import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { AuthGuard } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/signin', pathMatch: 'full'},
-    { path: 'dispositivos', component: DevicesComponent, children: [
+    { path: 'dispositivos', component: DevicesComponent, canActivate: [AuthGuard],children: [
         { path: '', component: InitComponent },
-        { path: ':id', component: DeviceDetailComponent },
-        { path: ':id/config', component: DeviceConfigComponent },
-        { path: ':id/config/edit', component: DeviceEditComponent }
+        { path: ':id', component: DeviceDetailComponent, canActivate: [AuthGuard] },
+        { path: ':id/config', component: DeviceConfigComponent, canActivate: [AuthGuard] },
+        { path: ':id/config/edit', component: DeviceEditComponent, canActivate: [AuthGuard] }
     ]},
     { path: 'signin', component: SigninComponent }
 ];

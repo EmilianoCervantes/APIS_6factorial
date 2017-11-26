@@ -23,6 +23,7 @@ import { DeviceItemComponent } from './devices/device-list/device-item/device-it
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -50,7 +51,7 @@ import { AuthService } from './auth/auth.service';
         useClass: HeadersInterceptor,
         multi: true
     },
-    AuthService],
+    AuthService, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
