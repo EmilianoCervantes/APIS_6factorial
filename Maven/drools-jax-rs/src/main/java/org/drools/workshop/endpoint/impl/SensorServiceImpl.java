@@ -73,29 +73,53 @@ public class SensorServiceImpl implements SensorService {
         return dispositivos;
     }
 
-/* Crea Mediciones */
+/* Crea Sensores */
     @Override
-    public Medicion crea(Medicion medicion) {
+    public Sensor crea(Sensor sensor) {
         System.out.println(">> kSession: " + kSession);
         printKieSessionAllFacts(kSession);
-        System.out.println(">> Medicion: " + medicion);
-        kSession.insert(medicion);
+        System.out.println(">> Sensor: " + sensor);
+        kSession.insert(sensor);
         int fired = kSession.fireAllRules();
         System.out.println(">> Fired: " + fired);
-        return medicion;
+        return sensor;
 
     }
 
     @Override
-    public List<Medicion> getMediciones() {
-        List<Medicion> mediciones = new ArrayList<Medicion>();
+    public List<Sensor> getSensores() {
+        List<Sensor> sensores = new ArrayList<Sensor>();
         for (Object o : kSession.getObjects()) {
-            if (o instanceof Medicion) {
-                mediciones.add((Medicion) o);
+            if (o instanceof Sensor) {
+                sensores.add((Sensor) o);
             }
         }
-        return mediciones;
+        return sensores;
     }
+
+    /* Crea Mediciones */
+        @Override
+        public Medicion crea(Medicion medicion) {
+            System.out.println(">> kSession: " + kSession);
+            printKieSessionAllFacts(kSession);
+            System.out.println(">> Medicion: " + medicion);
+            kSession.insert(medicion);
+            int fired = kSession.fireAllRules();
+            System.out.println(">> Fired: " + fired);
+            return medicion;
+
+        }
+
+        @Override
+        public List<Medicion> getMediciones() {
+            List<Medicion> mediciones = new ArrayList<Medicion>();
+            for (Object o : kSession.getObjects()) {
+                if (o instanceof Medicion) {
+                    mediciones.add((Medicion) o);
+                }
+            }
+            return mediciones;
+        }
 
       @Override
     public List<Valor> getValores() {

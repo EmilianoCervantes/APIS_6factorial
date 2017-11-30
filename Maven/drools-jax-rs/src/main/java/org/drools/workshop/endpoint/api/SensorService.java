@@ -41,6 +41,17 @@ public interface SensorService {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
+    @Path("/crea-sensor")
+    public Sensor crea(@NotNull Sensor sensor);
+
+    @GET
+    @Produces("application/json")
+    @Path("/sensores")
+    public List<Sensor> getSensores();
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
     @Path("/crea-medicion")
     public Medicion crea(@NotNull Medicion medicion);
 

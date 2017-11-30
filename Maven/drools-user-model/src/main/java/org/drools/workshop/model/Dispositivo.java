@@ -11,15 +11,20 @@ public class Dispositivo {
 
   private Integer idDispositivo;
   private String nombreDispositivo;
-  private String tipoDispositivo;
+  private boolean estado; //prendido/apagado
+  private String modo;//caliente/frio
+  private Integer intensidad;//1,2,3
   private Integer idForaneoHabitacion;
 
   public Dispositivo(){}
 
-  public Dispositivo(Integer id, String nombre, String tipo, Integer idForaneo){
+  public Dispositivo(Integer id, String nombre, boolean estado,
+    String modo, Integer intensidad, Integer idForaneo){
 	  this.idDispositivo = id;
 	  this.nombreDispositivo = nombre;
-	  this.tipoDispositivo = tipo;
+    this.estado = estado;
+    this.modo = modo;
+    this.intensidad = intensidad;
 	  this.idForaneoHabitacion = idForaneo;
   }
 
@@ -39,12 +44,25 @@ public class Dispositivo {
       this.nombreDispositivo = nombre;
   }
 
-  public String getTipoDispositivo() {
-      return tipoDispositivo;
+  public boolean getEstado() {
+      return estado;
+  }
+  public void setEstado(boolean estado) {
+      this.estado = estado;
   }
 
-  public void setTipoDispositivo(String tipo) {
-      this.tipoDispositivo = tipo;
+  public String getModo() {
+      return modo;
+  }
+  public void setModo(String modo) {
+      this.modo = modo;
+  }
+
+  public Integer getIntensidad() {
+      return intensidad;
+  }
+  public void setIntensidad(Integer intensidad) {
+      this.intensidad = intensidad;
   }
 
   public Integer getIdForaneoHabitacion() {
@@ -60,7 +78,7 @@ public class Dispositivo {
   @Override
   public String toString() {
       return "Dispositivo{" + "id=" + idDispositivo + ", nombre=" + nombreDispositivo +
-      ", tipo=" + tipoDispositivo + '}';
+      ", estado=" + estado + ", modo=" + modo + ", intensidad=" + intensidad + '}';
   }
 
 }

@@ -9,64 +9,49 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Medicion {
   private Integer idMedicion;
-  private String tipoMedicion;
-  private String fecha;
-  private String hora;
   private Integer valor;
-  private Integer idForaneoDispositivo;
+  private String fecha;
+  private Integer hora;
+  private Integer idForaneoSensor;
 
   public Integer getIdMedicion() {
       return idMedicion;
   }
-
   public void setIdMedicion(Integer id) {
       this.idMedicion = id;
-  }
-
-  public String getTipoMedicion() {
-      return tipoMedicion;
-  }
-
-  public void setTipoMedicion(String tipo) {
-      this.tipoMedicion = tipo;
-  }
-
-  public String getFecha() {
-      return fecha;
-  }
-
-  public void setFecha(String fecha) {
-      this.fecha = fecha;
-  }
-
-  public String getHora() {
-      return hora;
-  }
-
-  public void setHOra(String hora) {
-      this.hora = hora;
   }
 
   public Integer getValor() {
       return valor;
   }
-
-  public void setValor(Integer id) {
-      this.valor = id;
+  public void setValor(Integer valor) {
+      this.valor = valor;
   }
 
-  public Integer getIdForaneoDispositivo() {
-      return idForaneoDispositivo;
+  public String getFecha() {
+      return fecha;
+  }
+  public void setFecha(String fecha) {
+      this.fecha = fecha;
   }
 
-  public void setIdForaneoDispositivo(Integer id) {
-      this.idForaneoDispositivo = id;
+  public Integer getHora() {
+      return hora;
+  }
+  public void setHora(Integer hora) {
+      this.hora = hora;
+  }
+
+  public Integer getIdForaneoSensor() {
+      return idForaneoSensor;
+  }
+  public void setIdForaneoSensor(Integer id) {
+      this.idForaneoSensor = id;
   }
 
   @Override
   public String toString() {
-      return "Medicion{" + "id=" + idMedicion + ", tipo=" + tipoMedicion +
-      ", fecha=" + fecha + ", hora=" + hora + ", valor=" + valor +'}';
+      return "Medicion{" + "id=" + idMedicion + ", fecha=" + fecha + ", hora=" + hora + ", valor=" + valor +'}';
   }
 
 }
