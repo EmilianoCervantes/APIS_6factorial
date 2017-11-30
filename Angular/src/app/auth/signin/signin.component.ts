@@ -20,28 +20,5 @@ export class SigninComponent implements OnInit {
   	const email = form.value.email;
   	const password = form.value.password;
   	this.authService.signinUser(email, password);
-  	const idToken = '';
-  	/*var numbers = Observable.timer(2000);
-  	numbers.subscribe(x =>{
-      //alert(this.authService.isAuthenticated());
-      console.log(this.authService.isAuthenticated());
-    });
-  	if(this.authService.isAuthenticated()){
-  		this.onPass();
-  	}*/
-  	//this.onPass();
-  	var numbers = Observable.timer(2000);
-  	numbers.subscribe(x =>{
-      //alert(this.authService.isAuthenticated());
-      console.log(this.authService.isAuthenticated());
-      if(this.authService.isAuthenticated()){
-  		this.onPass();
-  	  }
-    });
   }
-
-  onPass() {
-   	this.router.navigate(['dispositivos']);
-  }
-
 }
