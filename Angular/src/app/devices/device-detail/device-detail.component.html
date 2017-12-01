@@ -1,12 +1,57 @@
-<div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
-    <div class="card-block">
-        <h3 class="card-title">{{device.nombreDispositivo}}</h3>
-        <hr>
-        <p class="card-text">Tipo: {{device.tipoDispositivo}}</p>
-        <p class="card-text">Medida: {{device.idDispositivo}}</p>
-        <p class="card-text">Fecha: 21/nov/2017</p>
-        <p class="card-text">Hora: 12:00</p>
-        <a (click)="onConfig()" class="btn btn-primary">Configurar</a>
-        <a (click)="onDelete()" class="btn btn-danger">Borrar</a>
+<div class="detail-device">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-device">
+        <div class="card-header d-flex align-items-center">
+          <h3 class="h4">Dispositivo #{{dispositivo.id}}</h3>
+          <!-- Dropdown button -->
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Acciones
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" (click)="onEditDevice()">Editar</a>
+              <!--<a class="dropdown-item" (click)="onAddComment()">Comentar</a>
+              <a class="dropdown-item">Marcar</a>-->
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="onDeleteDevice()">Eliminar</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="title">{{device.nombre}}</p>
+          <p class="description">{{device.description}}</p>
+          <p>
+            estatus: <span class="back alta">alta</span>
+            prioridad: <span class="back medio">medio</span>
+          </p>
+          <p>producto(s):
+            <!-- Products iteration -->
+            <span class="back ERP">ERP</span>
+            <!-- Products iteracion end -->
+          </p>
+          <p class="title text-left">Fechas:</p>
+          <hr>
+          <p class="text-min"><b>Creación:</b> 17-10-17</p>
+          <p class="text-min"><b>cierre:</b> 18-10-17</p>
+          <p class="title text-left">Cliente:</p>
+          <hr>
+          <p class="text-min"><b>{{ticket.company}} Tijuana</b></p>
+          <p class="text-min">{{ticket.client_name}} <span class="italic">&#60; {{ticket.client_email}} &#62;</span></p>
+          <p class="text-min"> {{ticket.client_phone}} </p>
+          <p class="title text-left">Responsable:</p>
+          <hr>
+          <p class="">{{ticket.responsable_name}} &#60; {{ticket.responsable_email}} &#62;</p>
+          <p class="title text-left">Comentarios</p>
+          <hr>
+          <!-- Comments iteration -->
+          <div *ngFor="let comment of ticket.comments">
+            <p class="author">{{comment.name}}:</p>
+            <p class="text-left">{{comment.message}}<br><small>{{comment.created}}</small></p>
+            <!-- Comments iteration end -->
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

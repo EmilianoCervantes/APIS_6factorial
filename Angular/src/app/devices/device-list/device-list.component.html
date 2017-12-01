@@ -1,11 +1,25 @@
-<!--Forma original en la que habían establecido para los items
-<ul class="list-group">
-    <li *ngFor="let device of devices" class="list-group-item list-group-item-info" [routerLink]="device.id" routerLinkActive="bg-info">{{device.nombreDispositivo}}</li>
-</ul>-->
-<!--Forma de Emiliano-->
-<div class="row">
-	<div class="col-xs-12">
-		<app-device-item  *ngFor="let deviceElem of devices; let i = index"
-			[device]="deviceElem" [index]="i"></app-device-item>
-	</div>
-</div>
+<section class="tables">
+    <div class="card card-ticket">
+        <div class="card-header d-flex align-items-center">
+            <h3 class="h4">Dispositivos</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tr *ngFor="let device of devices" [routerLink]="device.id" routerLinkActive="bg-info">
+                    <td scope="row">{{device.id}}</td>
+                    <td>{{device.name}}</td>
+                    <td>{{device.tipo}}</td>
+                    <td>{{device.created}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>

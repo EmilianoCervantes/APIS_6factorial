@@ -10,29 +10,33 @@ import { DeviceService } from '../device.service';
     styleUrls: ['./device-detail.component.scss']
 })
 export class DeviceDetailComponent implements OnInit {
-    device: Device;
-    id: number;
+  device: Device;
+  id: number;
 
-    constructor(private deviceService: DeviceService, private route: ActivatedRoute, private router: Router) {
+  constructor(private deviceService: DeviceService, private route: ActivatedRoute, private router: Router) {
 
-    }
-    ngOnInit() {
-        this.route.params
-            .subscribe(
-            (params: Params) => {
-                this.id = +params['id'];
-                this.device = this.deviceService.getDevice(this.id);
-            }
-        );
-    }
+  }
+  ngOnInit() {
+    this.route.params
+      .subscribe(
+      (params: Params) => {
+        this.id = +params['id'];
+        this.device = this.deviceService.getDevice(this.id);
+      }
+    );
+  }
 
-    onConfig() {
-        this.router.navigate(['config'], { relativeTo: this.route });
-    }
+  onEditDevice() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
 
-    onDelete(){
-        this.deviceService.deleteDevice(this.id);
-        this.router.navigate(['/dispositivos']);
-    }
+  /*onAddComment() {
+    this.router.navigate(['comment'], { relativeTo: this.route });
+  }
+  */
 
+  onDeleteDevice() {
+    this.deviceService.deleteDevice(this.id);
+    this.router.navigate(['/dispositivos']);
+  }
 }

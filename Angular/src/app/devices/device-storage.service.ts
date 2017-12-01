@@ -9,44 +9,21 @@ import { Device } from './device.model';
 export class DeviceStorageService {
     constructor(private http: Http, private deviceService: DeviceService) { }
 
-    /*
+    storageDevices() {
+        return this.http.put('https://tickets-sac.firebaseio.com/tickets.json', this.deviceService.getDevices());
+    }
+
     storeDevice(devices: any[]) {
-        return this.http.post('', devices);
-    }*/
-
-    /*getDevices() {
-        let headers = new Headers();
-        let opts = new RequestOptions();
-        opts.headers = headers;
-        this.http.get('http://localhost:4200/assets/devices.json')
-            .subscribe((response: Response) => {
-            const devices: Device[] = response.json();
-            this.deviceService.setDevices(devices);
-        });
-    }*/
-
-    //No funcionó hasta el momento com mapeo
-    /*getDevices() {
-        let headers = new Headers();
-        let opts = new RequestOptions();
-        opts.headers = headers;
-        this.http.get('http://localhost:8080/api/sensores/dispositivos')
-            .map(
-                (response: Response) => {
-                    const devices: Device[] = response.json();
-                    return devices;
-                }
-            )
-            .subscribe(
-                (devices: Device[]) => {
-                this.deviceService.setDevices(devices);
-            });
-    }*/
+        return this.http.post('https://tickets-sac.firebaseio.com/tickets.json', devices);
+    }
 
     getDevices() {
-        this.http.get('http://localhost:8080/api/sensores/dispositivos')
+        let headers = new Headers();
+        headers.append('ContentType', 'application/json');
+        let opts = new RequestOptions();
+        opts.headers = headers;
+        this.http.get('https://tickets-sac.firebaseio.com/tickets.json', opts)
             .subscribe((response: Response) => {
-            console.log(response.json());
             const devices: Device[] = response.json();
             this.deviceService.setDevices(devices);
         });
