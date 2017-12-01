@@ -10,11 +10,13 @@ export class ConexionMavenService {
   private habitacionesUrl: string = 'http://localhost:8080/api/sensores/habitaciones';
   private dispositivosUrl: string = 'http://localhost:8080/api/sensores/dispositivos';
   private medicionesUrl: string = 'http://localhost:8080/api/sensores/mediciones';
+  private sensoresUrl: string = 'http://localhost:8080/api/sensores/sensores';
 
   /* URLS de POST */
   private nuevaHabitacionUrl: string = 'http://localhost:8080/api/sensores/crea-habitacion';
   private nuevoDispositivosUrl: string = 'http://localhost:8080/api/sensores/crea-dispositivo';
   private nuevaMedicionesUrl: string = 'http://localhost:8080/api/sensores/crea-medicion';
+  private nuevoSensoresUrl: string = 'http://localhost:8080/api/sensores/crea-sensor';
 
   constructor(private http: Http) {  }
   /*FUnciones de GET*/

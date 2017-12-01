@@ -9,15 +9,19 @@
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Modo</th>
+                        <th>Intensidad</th>
+                        <th>Número de habitación</th>
                     </tr>
                 </thead>
                 <tr *ngFor="let device of devices" [routerLink]="device.id" routerLinkActive="bg-info">
-                    <td scope="row">{{device.id}}</td>
-                    <td>{{device.name}}</td>
-                    <td>{{device.tipo}}</td>
-                    <td>{{device.created}}</td>
+                    <td scope="row">{{device.idDispositivo}}</td>
+                    <td>{{device.nombreDispositivo}}</td>
+                    <td>{{device.estado}}</td>
+                    <td>{{device.modo}}</td>
+                    <td>{{device.intensidad}}</td>
+                    <td>{{device.idForaneoHabitacion}}</td>
                 </tr>
             </table>
         </div>

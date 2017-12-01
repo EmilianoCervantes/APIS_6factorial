@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="card card-device">
         <div class="card-header d-flex align-items-center">
-          <h3 class="h4">Dispositivo #{{dispositivo.id}}</h3>
+          <h3 class="h4">Dispositivo #{{device.id}}</h3>
           <!-- Dropdown button -->
           <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,37 +19,15 @@
           </div>
         </div>
         <div class="card-body">
-          <p class="title">{{device.nombre}}</p>
-          <p class="description">{{device.description}}</p>
-          <p>
-            estatus: <span class="back alta">alta</span>
-            prioridad: <span class="back medio">medio</span>
-          </p>
-          <p>producto(s):
-            <!-- Products iteration -->
-            <span class="back ERP">ERP</span>
-            <!-- Products iteracion end -->
-          </p>
-          <p class="title text-left">Fechas:</p>
+          <p class="title">{{device.idDispositivo}}</p>
+          <p class="nombreDispositivo">{{device.nombreDispositivo}}</p>
+          <p class="title text-left">Estado:</p>
           <hr>
-          <p class="text-min"><b>Creación:</b> 17-10-17</p>
-          <p class="text-min"><b>cierre:</b> 18-10-17</p>
-          <p class="title text-left">Cliente:</p>
+          <p class="text-min"><b>Estado del dispositivo:</b> {{device.estado}}</p>
           <hr>
-          <p class="text-min"><b>{{ticket.company}} Tijuana</b></p>
-          <p class="text-min">{{ticket.client_name}} <span class="italic">&#60; {{ticket.client_email}} &#62;</span></p>
-          <p class="text-min"> {{ticket.client_phone}} </p>
-          <p class="title text-left">Responsable:</p>
-          <hr>
-          <p class="">{{ticket.responsable_name}} &#60; {{ticket.responsable_email}} &#62;</p>
-          <p class="title text-left">Comentarios</p>
-          <hr>
-          <!-- Comments iteration -->
-          <div *ngFor="let comment of ticket.comments">
-            <p class="author">{{comment.name}}:</p>
-            <p class="text-left">{{comment.message}}<br><small>{{comment.created}}</small></p>
-            <!-- Comments iteration end -->
-          </div>
+          <p class="text-min"><b>Modo</b> {{device.modo}}</p>
+          <p class="text-min"><b>Intensidad</b> {{device.intensitdad}}</p>
+          <p class="text-min"><b>Id de la habitación:</b> {{device.idForaneoHabitacion}}</p>
         </div>
       </div>
     </div>

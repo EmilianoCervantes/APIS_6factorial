@@ -1,17 +1,17 @@
 export class Device {
-    public id: number;
-    public nombre: string;
-    public tipo: string;
-    public medidas: string;
-    public fecha: number;
-    public hora: string;
+    public idDispositivo: number;
+    public nombreDispositivo: string;
+    public estado: boolean;
+    public modo: string;
+    public intensidad: number;
+    public idForaneoHabitacion: number;
 
-    constructor(id: number, name: string, type: string, measure: string, date: string, time: string) {
-        this.id = id;
-        this.nombre = name;
-        this.tipo = type;
-        this.medidas = "measure";
-        this.fecha = Date.now();
-        this.hora = "time";
+    constructor(idDispositivo: number, nombreDispositivo: string, estado: boolean, modo: string, intensidad: number, idForaneoHabitacion: number) {
+        this.idDispositivo = idDispositivo;
+        this.nombreDispositivo = name;
+        this.estado = estado;
+        this.modo = modo;
+        this.intensidad = intensidad;
+        this.idForaneoHabitacion = idForaneoHabitacion;
     }
 }

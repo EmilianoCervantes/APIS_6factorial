@@ -58,18 +58,30 @@ export class DeviceEditComponent implements OnInit {
   }
 
   private initForm(){
-    let deviceName = '';
-    let deviceType = '';
+    let id: number;
+    let nombre = '';
+    let estado: boolean;
+    let deviceModo = '';
+    let intensidad: number;
+    let habitacion: number;
 
     if(this.editMode){
       const device = this.deviceService.getDevice(this.id);
-      deviceName = device.nombre;
-      deviceType = device.tipo;
+      id = device.idDispositivo;
+      nombre = device.nombreDispositivo;
+      estado = device.estado;
+      deviceModo= device.modo;
+      intensidad = device.intensidad;
+      habitacion = device.idForaneoHabitacion;
     }
 
     this.deviceForm = new FormGroup({
-      'name': new FormControl(deviceName, Validators.required),
-      'type': new FormControl(deviceType, Validators.required)
+      'id': new FormControl(id, Validators.required),
+      'nombre': new FormControl(nombre, Validators.required),
+      'estado': new FormControl(estado, Validators.required),
+      'modo': new FormControl(deviceModo, Validators.required),
+      'intensidad': new FormControl(intensidad, Validators.required),
+      'idhabitacion': new FormControl(habitacion, Validators.required),
     });
   }
 }
