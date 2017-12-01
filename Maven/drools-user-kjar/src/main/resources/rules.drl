@@ -1,26 +1,26 @@
 package org.drools.workshop;
 import org.drools.workshop.model.*;
 
-rule "Creación de Habitaciones"
+rule "Creacion de Habitaciones"
      when
      then
       insert(new Habitacion(1,"Sala",1,false));
       System.out.println("Hechos Creados");
 end
 
-rule "Creación de Sensores"
+rule "Creacion de Sensores"
     when
     then
       insert(new Sensor(1,"Sensor de Temperatura",1,0));
-      insert(new Sensor(2,"Sensor de Ocupación",1,0));
+      insert(new Sensor(2,"Sensor de Ocupacion",1,0));
       insert(new Sensor(3,"Sensor de Humedad",1,0));
       insert(new Sensor(4,"Sensor de Temperatura",2,0));
-      insert(new Sensor(5,"Sensor de Ocupación",2,0));
+      insert(new Sensor(5,"Sensor de Ocupacion",2,0));
       insert(new Sensor(6,"Sensor de Humedad",2,0));
       System.out.println("Hechos Creados");
 end
 
-rule "Creación de Dispositivos"
+rule "Creacion de Dispositivos"
     when
     then
       insert(new Dispositivo(1,"Aire Acondicionado",false,"",0,1));
@@ -31,7 +31,7 @@ rule "Creación de Dispositivos"
       insert(new Dispositivo(6,"Deshumidificador",false,"",0,2));
 end
 
-rule "Actualización de Mediciones Actuales"
+rule "Actualizacion de Mediciones Actuales"
     when
       $m : Medicion()
       $s : Sensor($m.getIdForaneoSensor() == idSensor && $m.getIdMedicion() > idMedicionActual)
@@ -46,40 +46,40 @@ REGLAS PARA LA TEMPERATURA
 **************************************************************
 */
 
-rule "Cuando la temperatura es mayor o igual a 40°"
+rule "Cuando la temperatura es mayor o igual a 40�"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor >= 40)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Aire Acondicionado")
     then
       $d.setEstado(true);
-      $d.setModo("frío");
+      $d.setModo("frio");
       $d.setIntensidad(3);
 end
 
-rule "Cuando la temperatura es mayor a 35 y a 40°"
+rule "Cuando la temperatura es mayor a 35 y a 40"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 35 && valor < 40)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Aire Acondicionado")
     then
       $d.setEstado(true);
-      $d.setModo("frío");
+      $d.setModo("frio");
       $d.setIntensidad(2);
 end
 
-rule "Cuando la temperatura es mayor a 27 y menor o igual a 35°"
+rule "Cuando la temperatura es mayor a 27 y menor o igual a 35�"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 27 && valor <= 35)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Aire Acondicionado")
     then
       $d.setEstado(true);
-      $d.setModo("frío");
+      $d.setModo("frio");
       $d.setIntensidad(1);
 end
 
-rule "Cuando la temperatura es menor o igual a 5°"
+rule "Cuando la temperatura es menor o igual a 5"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor <= 5)
@@ -90,7 +90,7 @@ rule "Cuando la temperatura es menor o igual a 5°"
       $d.setIntensidad(3);
 end
 
-rule "Cuando la temperatura es mayor a 5° pero menor o igual a 13°"
+rule "Cuando la temperatura es mayor a 5 pero menor o igual a 13"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 5 && valor <= 13)
@@ -101,7 +101,7 @@ rule "Cuando la temperatura es mayor a 5° pero menor o igual a 13°"
       $d.setIntensidad(2);
 end
 
-rule "Cuando la temperatura es mayor a 13° pero menor o igual a 20°"
+rule "Cuando la temperatura es mayor a 13 pero menor o igual a 20"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 13 && valor <= 20)
@@ -112,7 +112,7 @@ rule "Cuando la temperatura es mayor a 13° pero menor o igual a 20°"
       $d.setIntensidad(1);
 end
 
-rule "Cuando la temperatura es mayor a 20° pero menor o igual a 27°"
+rule "Cuando la temperatura es mayor a 20 pero menor o igual a 27"
     when
       $s : Sensor(nombreSensor == "Sensor de Temperatura")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 20 && valor <= 27)
@@ -125,13 +125,13 @@ end
 
 /*
 **************************************************************
-REGLAS PARA LA ILUMINACIÓN
+REGLAS PARA LA ILUMINACION
 **************************************************************
 */
 
-rule "Cuando la habitación está vacía"
+rule "Cuando la habitacion esta vacia"
     when
-      $s : Sensor(nombreSensor == "Sensor de Ocupación")
+      $s : Sensor(nombreSensor == "Sensor de Ocupacion")
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor == 0)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Luces")
     then
@@ -140,9 +140,9 @@ rule "Cuando la habitación está vacía"
       $d.setIntensidad(0);
 end
 
-rule "Cuando hay alguien en la habitación y no hay ventanas"
+rule "Cuando hay alguien en la habitacion y no hay ventanas"
     when
-      $s : Sensor(nombreSensor == "Sensor de Ocupación")
+      $s : Sensor(nombreSensor == "Sensor de Ocupacion")
       $h : Habitacion($s.getIdForaneoHabitacion() == idHabitacion)
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 0 && $h.getVentana() == false)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Luces")
@@ -152,21 +152,21 @@ rule "Cuando hay alguien en la habitación y no hay ventanas"
       $d.setIntensidad(10);
 end
 
-rule "Cuando hay alguien en la habitación, hay ventanas, y la hora está de 9AM a 17PM"
+rule "Cuando hay alguien en la habitacion, hay ventanas, y la hora esta de 9AM a 17PM"
     when
-      $s : Sensor(nombreSensor == "Sensor de Ocupación")
+      $s : Sensor(nombreSensor == "Sensor de Ocupacion")
       $h : Habitacion($s.getIdForaneoHabitacion() == idHabitacion)
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 0 && $h.getVentana() == true && hora >= 9 && hora <= 17)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Luces")
     then
       $d.setEstado(true);
-      $d.setModo("frío");
+      $d.setModo("frio");
       $d.setIntensidad(5);
 end
 
-rule "Cuando hay alguien en la habitación, hay ventanas, y la hora es más temprana de 9AM"
+rule "Cuando hay alguien en la habitacion, hay ventanas, y la hora es mas temprana de 9AM"
     when
-      $s : Sensor(nombreSensor == "Sensor de Ocupación")
+      $s : Sensor(nombreSensor == "Sensor de Ocupacion")
       $h : Habitacion($s.getIdForaneoHabitacion() == idHabitacion)
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 0 && $h.getVentana() == true && hora < 9)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Luces")
@@ -176,9 +176,9 @@ rule "Cuando hay alguien en la habitación, hay ventanas, y la hora es más temp
       $d.setIntensidad(9);
 end
 
-rule "Cuando hay alguien en la habitación, hay ventanas, y la hora es más tarde de 17PM"
+rule "Cuando hay alguien en la habitacion, hay ventanas, y la hora es mas tarde de 17PM"
     when
-      $s : Sensor(nombreSensor == "Sensor de Ocupación")
+      $s : Sensor(nombreSensor == "Sensor de Ocupacion")
       $h : Habitacion($s.getIdForaneoHabitacion() == idHabitacion)
       $m : Medicion($s.getIdSensor() == idForaneoSensor && valor > 0 && $h.getVentana() == true && hora > 17)
       $d : Dispositivo($s.getIdForaneoHabitacion() == idForaneoHabitacion && nombreDispositivo == "Luces")
