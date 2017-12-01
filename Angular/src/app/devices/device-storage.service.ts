@@ -10,11 +10,11 @@ export class DeviceStorageService {
     constructor(private http: Http, private deviceService: DeviceService) { }
 
     storageDevices() {
-        return this.http.put('https://tickets-sac.firebaseio.com/tickets.json', this.deviceService.getDevices());
+        return this.http.put('http://localhost:8080/api/sensores/crea-dispositivo', this.deviceService.getDevices());
     }
 
     storeDevice(devices: any[]) {
-        return this.http.post('https://tickets-sac.firebaseio.com/tickets.json', devices);
+        return this.http.post('http://localhost:8080/api/sensores/crea-dispositivo', devices);
     }
 
     getDevices() {
@@ -22,7 +22,7 @@ export class DeviceStorageService {
         headers.append('ContentType', 'application/json');
         let opts = new RequestOptions();
         opts.headers = headers;
-        this.http.get('https://tickets-sac.firebaseio.com/tickets.json', opts)
+        this.http.get('http://localhost:8080/api/sensores/dispositivos', opts)
             .subscribe((response: Response) => {
             const devices: Device[] = response.json();
             this.deviceService.setDevices(devices);
