@@ -11,7 +11,7 @@ import { AuthGuard } from './auth/auth-guard.service';
 const appRoutes: Routes = [
     { path: '', redirectTo: '/signin', pathMatch: 'full'},
     { path: 'dispositivos', component: DevicesComponent, canActivate: [AuthGuard],children: [
-        { path: '', component: InitComponent },
+        { path: '', component: DeviceEditComponent },
         { path: ':id', component: DeviceDetailComponent, canActivate: [AuthGuard] },
         { path: ':id/edit', component: DeviceEditComponent, canActivate: [AuthGuard] }
     ]},
