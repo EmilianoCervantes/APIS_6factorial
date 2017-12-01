@@ -14,7 +14,7 @@ export class DeviceService {
 
     getDevice(id: number) {
         for (this.index = 0; this.index < this.devices.length; this.index++) {
-            if (id === this.devices[this.index].id) {
+            if (id === this.devices[this.index].idDispositivo) {
                 return this.devices[this.index];
             }
         }
@@ -26,16 +26,15 @@ export class DeviceService {
     }
 
     addDevice(device: Device) {
-        device.id = this.devices.length;
+        device.idDispositivo = this.devices.length;
         this.devices.push(device);
         this.deviceChanged.next(this.devices.slice());
     }
 
     updateDevice(id: number, newDevice: Device) {
         for (this.index = 0; this.index < this.devices.length; this.index++) {
-            if (id === this.devices[this.index].id) {
-                newDevice.id = id;
-                newDevice.fecha = Date.now();
+            if (id === this.devices[this.index].idDispositivo) {
+                newDevice.idDispositivo = id;
                 this.devices[this.index] = newDevice;
                 this.deviceChanged.next(this.devices.slice());
             }
@@ -55,7 +54,7 @@ export class DeviceService {
 
     deleteDevice(id: number) {
         for (this.index = 0; this.index < this.devices.length; this.index++) {
-            if (id === this.devices[this.index].id) {
+            if (id === this.devices[this.index].idDispositivo) {
                 this.devices.splice(this.index, 1);
                 this.deviceChanged.next(this.devices.slice());
             }
